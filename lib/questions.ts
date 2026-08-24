@@ -1,0 +1,42 @@
+import {Question} from './types';
+const all=['quick','weekly','deep'] as const;
+export const questions:Question[]=[
+{id:'connection',category:'Emotional connection',text:'How connected do you feel to your partner today?',type:'rating',required:true,checkInTypes:[...all]},
+{id:'supported',category:'Emotional connection',text:'How emotionally supported have you felt recently?',type:'rating',required:true,checkInTypes:[...all]},
+{id:'appreciation',category:'Appreciation',text:'What is something you appreciated about your partner recently?',type:'text',required:true,checkInTypes:[...all]},
+{id:'need',category:'Needs',text:'What is something you need more of right now?',type:'text',required:true,checkInTypes:[...all]},
+{id:'unresolved',category:'Repair after conflict',text:'Is there anything small that feels unresolved?',type:'text',checkInTypes:['quick','weekly']},
+{id:'together',category:'Quality time',text:'What is one thing you would enjoy doing together soon?',type:'text',checkInTypes:['quick']},
+{id:'week-good',category:'Emotional connection',text:'What felt good in your relationship this week?',type:'text',checkInTypes:['weekly']},
+{id:'most-connected',category:'Quality time',text:'When did you feel most connected?',type:'text',checkInTypes:['weekly','deep']},
+{id:'understood',category:'Communication',text:'How understood have you felt this week?',type:'rating',checkInTypes:['weekly','deep']},
+{id:'distant',category:'Communication',text:'Was there a moment when you felt misunderstood or distant?',type:'text',checkInTypes:['weekly','deep']},
+{id:'stress',category:'Stress and external pressures',text:'How much has outside stress affected your connection?',type:'rating',checkInTypes:['weekly','deep']},
+{id:'stress-show',category:'Stress and external pressures',text:'What outside stress affected how you showed up?',type:'text',checkInTypes:['weekly','deep']},
+{id:'cared',category:'Appreciation',text:'What did your partner do that made you feel cared for?',type:'text',checkInTypes:['weekly','deep']},
+{id:'noticed',category:'Needs',text:'What do you wish your partner had noticed?',type:'text',checkInTypes:['weekly','deep']},
+{id:'pattern',category:'Conflict patterns',text:'Is there a recurring pattern worth paying attention to?',type:'text',checkInTypes:['weekly','deep']},
+{id:'next-need',category:'Needs',text:'What do you need from your partner next week?',type:'text',checkInTypes:['weekly']},
+{id:'contribute',category:'Shared goals',text:'What can you personally contribute to the coming week?',type:'text',checkInTypes:['weekly','deep']},
+{id:'safety',category:'Trust and emotional safety',text:'How safe do you feel sharing your honest feelings?',type:'rating',checkInTypes:['weekly','deep']},
+{id:'affection',category:'Intimacy and affection',text:'How satisfied do you feel with affection and closeness?',type:'rating',checkInTypes:['weekly','deep']},
+{id:'responsibilities',category:'Shared responsibilities',text:'How balanced do shared responsibilities feel?',type:'rating',checkInTypes:['weekly','deep']},
+{id:'goals',category:'Shared goals',text:'How aligned do your near-term priorities feel?',type:'rating',checkInTypes:['weekly','deep']},
+{id:'quality',category:'Quality time',text:'How satisfied are you with your quality time together?',type:'rating',checkInTypes:['weekly','deep']},
+{id:'repair',category:'Repair after conflict',text:'How well have you found your way back after tension?',type:'rating',checkInTypes:['weekly','deep']},
+{id:'first',category:'Conflict patterns',text:'When a difficult pattern appears, what usually happens first?',type:'text',checkInTypes:['deep']},
+{id:'reaction',category:'Conflict patterns',text:'How do you typically react when your partner withdraws or becomes upset?',type:'text',checkInTypes:['deep']},
+{id:'perspective',category:'Communication',text:'How might your partner describe the situation?',type:'text',checkInTypes:['deep']},
+{id:'protect',category:'Trust and emotional safety',text:'What do you think your reaction is trying to protect?',type:'text',checkInTypes:['deep']},
+{id:'exceptions',category:'Conflict patterns',text:'When is the problem less present?',type:'text',checkInTypes:['deep']},
+{id:'preserve',category:'Appreciation',text:'What is already working that you want to preserve?',type:'text',checkInTypes:['deep']},
+{id:'small-change',category:'Shared goals',text:'What small change would make the biggest positive difference?',type:'text',checkInTypes:['deep']},
+{id:'ten-percent',category:'Shared goals',text:'How would you notice the relationship had improved by 10%?',type:'text',checkInTypes:['deep']},
+{id:'assumptions',category:'Communication',text:'What assumptions might each of you be making?',type:'text',checkInTypes:['deep']},
+{id:'maintain',category:'Conflict patterns',text:'What pattern might you both unintentionally help maintain?',type:'text',checkInTypes:['deep']},
+{id:'different',category:'Repair after conflict',text:'What would you like to do differently next time?',type:'text',checkInTypes:['deep']},
+{id:'listen',category:'Communication',text:'What helps you feel listened to?',type:'choice',options:['Time without distractions','Questions and curiosity','A calm tone','A little space first'],checkInTypes:['quick','weekly']},
+];
+export const actions=['Take a 20-minute walk together','Share one specific appreciation each day','Have one meal without phones','Ask before offering solutions','Choose one calm time to discuss responsibilities'];
+export function selectQuestions(type:'quick'|'weekly'|'deep',seed:string){const candidates=questions.filter(q=>q.checkInTypes.includes(type));const core=candidates.filter(q=>q.required);const rest=candidates.filter(q=>!q.required).sort((a,b)=>hash(seed+a.id)-hash(seed+b.id));const count=type==='quick'?6:type==='weekly'?10:12;return [...core,...rest].slice(0,count)}
+function hash(s:string){return [...s].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,0)}
