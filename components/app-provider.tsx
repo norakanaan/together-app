@@ -16,7 +16,8 @@ const Context = createContext<AppContext | null>(null);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [data, setState] = useState<AppData>(defaults);
-  useEffect(() => setState(load()), []);
+  const [ready, setReady] = useState(false);
+  useEffect(() => { setState(load()); setReady(true); }, []);
 
   const setData = (next: AppData) => {
     setState(next);
@@ -28,7 +29,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setState(structuredClone(defaults));
   };
 
-  return <Context.Provider value={{ data, ready: true, setData, updateSession, clear }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ data, ready, setData, updateSession, clear }}>{children}</Context.Provider>;
 }
 
 export const useApp = () => {
