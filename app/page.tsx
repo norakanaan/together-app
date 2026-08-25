@@ -1,10 +1,15 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ArrowRight, CalendarDays, LockKeyhole, MessageCircle, Sparkles } from 'lucide-react';
 import { Shell } from '@/components/ui';
 import { useApp } from '@/components/app-provider';
+import Flow from './check-in/[sessionId]/[stage]/flow-client';
 
 export default function Home() {
+  const pathname = usePathname();
+  const flowMatch = pathname.match(/\/check-in\/([^/]+)\/([^/]+)\/?$/);
+  if (flowMatch) return <Flow params={Promise.resolve({ sessionId: flowMatch[1], stage: flowMatch[2] })} />;
   const { data, ready } = useApp();
   if (!ready) return <Shell><div className="loading">Making a calm space…</div></Shell>;
   const done = data.sessions.filter(s => s.completedAt).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
