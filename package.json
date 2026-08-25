@@ -1,1 +1,31 @@
-{"name":"together","version":"1.0.0","private":true,"scripts":{"dev":"next dev","build":"next build","start":"next start","test":"vitest run","test:e2e":"playwright test"},"dependencies":{"@hookform/resolvers":"latest","lucide-react":"latest","next":"latest","react":"latest","react-dom":"latest","react-hook-form":"latest","zod":"latest"},"devDependencies":{"@playwright/test":"latest","@testing-library/react":"latest","@types/node":"latest","@types/react":"latest","@types/react-dom":"latest","jsdom":"latest","typescript":"5.9.3","vitest":"latest"}}
+{
+    "name": "together",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "test": "vitest run",
+        "test:e2e": "playwright test"
+    },
+    "dependencies": {
+        "@hookform/resolvers": "latest",
+        "lucide-react": "latest",
+        "next": "latest",
+        "react": "latest",
+        "react-dom": "latest",
+        "react-hook-form": "latest",
+        "zod": "latest"
+    },
+    "devDependencies": {
+        "@playwright/test": "latest",
+        "@testing-library/react": "latest",
+        "@types/node": "latest",
+        "@types/react": "latest",
+        "@types/react-dom": "latest",
+        "jsdom": "latest",
+        "typescript": "5.9.3",
+        "vitest": "latest"
+    }
+}
