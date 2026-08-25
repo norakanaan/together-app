@@ -6,5 +6,8 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   images: { unoptimized: true },
+  // GitHub Pages serves project sites below /<repository-name>.
+  basePath: process.env.GITHUB_ACTIONS ? '/together-app' : '',
+  assetPrefix: process.env.GITHUB_ACTIONS ? '/together-app/' : '',
 };
 export default nextConfig;
